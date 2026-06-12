@@ -11,7 +11,7 @@ public class CharacterAttributes : MonoBehaviour
 
     private void Awake()
     {
-        //Load();
+        Load();
     }
 
     private void OnApplicationQuit()

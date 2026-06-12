@@ -16,6 +16,7 @@ public class Gun : MonoBehaviour
 
     protected bool CanShoot;
 
+    public event Action Hitted;
     public event Action Shooted;
 
     protected virtual void OnEnable()
@@ -49,6 +50,7 @@ public class Gun : MonoBehaviour
             if (hit.collider.TryGetComponent<Enemy>(out Enemy enemy))
             {
                 enemy.Health.DecreaseAmount(_damage);
+                Hitted?.Invoke();
             }
         }
     }

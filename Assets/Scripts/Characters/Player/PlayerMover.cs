@@ -8,9 +8,11 @@ public class PlayerMover : MonoBehaviour
     [SerializeField] private float _moveSpeed;
     [SerializeField] private float _gravityForce = 9.8f;
     [SerializeField] private Camera _camera;
-
     [SerializeField] private float _horizontalSensitivity;
 
+    [SerializeField] private float _speedUpgradeValue = 2f;
+
+    private float _baseSpeed;
     private CharacterController _characterController;
     private float _currentGravityForce;
     private Transform _cameraTransform;
@@ -36,6 +38,7 @@ public class PlayerMover : MonoBehaviour
         _characterController = GetComponent<CharacterController>();
         _currentGravityForce = _gravityForce;
         _cameraTransform = _camera.transform;
+        _baseSpeed = _moveSpeed;
     }
 
     private void Update()
@@ -72,5 +75,13 @@ public class PlayerMover : MonoBehaviour
         {
             _currentGravityForce = 0f;
         }
+    }
+
+    public void UpgradeByLevel(int level)
+    {
+        if (level < 0)
+            return;
+
+        _moveSpeed = _baseSpeed + level * _speedUpgradeValue;
     }
 }

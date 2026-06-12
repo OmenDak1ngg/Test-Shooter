@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class UserInput : MonoBehaviour
 {
+    private readonly KeyCode ShowUpgradesKey = KeyCode.Escape;
+
     private readonly string Vertical = "Vertical";
     private readonly string Horizontal = "Horizontal";
 
@@ -25,6 +27,7 @@ public class UserInput : MonoBehaviour
     public event Action<float> MouseMovedX;
     public event Action<float> MouseMovedY;
 
+    public event Action ClickedShowUpgrades;
     public event Action ShootKeyPressed;
     public event Action ShootKeyReleased;
     public event Action Switched;
@@ -32,6 +35,9 @@ public class UserInput : MonoBehaviour
     private void Awake()
     {
         _canControl = true;
+        Cursor.lockState = CursorLockMode.Locked;
+        SaveSystem.DeleteSave();
+        SaveSystem.Load();
     }
     
     private void Update()
@@ -62,6 +68,9 @@ public class UserInput : MonoBehaviour
 
         if(Input.GetKeyDown(SwitchKey)) 
             Switched?.Invoke();
+
+        if (Input.GetKeyDown(ShowUpgradesKey))
+            ClickedShowUpgrades?.Invoke();
     }
 
     public void DeactivateControls()

@@ -36,8 +36,8 @@ public class UserInput : MonoBehaviour
     {
         _canControl = true;
         Cursor.lockState = CursorLockMode.Locked;
-        SaveSystem.DeleteSave();
-        SaveSystem.Load();
+        //SaveSystem.DeleteSave();
+        //SaveSystem.Load();
     }
     
     private void Update()
